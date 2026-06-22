@@ -10,97 +10,117 @@
     
     <style>
         :root {
-            --bg-gradient: linear-gradient(135deg, #ffffff 0%, #fff5f5 50%, #fff9f0 100%);
-            --gold-light: #f3cf7a;
-            --gold-dark: #bfa15f;
-            --joy-pink: #ff7597;
-            --joy-accent: #ffb3c6;
-            --text-main: #2c2c2c;
-            --text-muted: #6e6e6e;
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(243, 207, 122, 0.4);
+            --gold: #dfba6b;
+            --gold-glow: rgba(223, 186, 107, 0.4);
+            --text-light: #ffffff;
+            --glass-card: rgba(0, 0, 0, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Cairo', sans-serif;
-            background: var(--bg-gradient);
-            color: var(--text-main);
+            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            /* استخدام الصورة الجميلة كخلفية كاملة ومثبتة للموقع */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('image_3.png') no-repeat center center fixed;
+            background-size: cover;
         }
 
+        /* الشاشة الافتتاحية الفاخرة */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #0d0d0d;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s;
+        }
+
+        .splash-btn {
+            padding: 18px 40px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0d0d0d;
+            background: linear-gradient(135deg, #fff, var(--gold));
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 30px var(--gold-glow);
+            letter-spacing: 1px;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 0 20px var(--gold-glow); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(223, 186, 107, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 20px var(--gold-glow); }
+        }
+
+        /* كارت الدعوة الزجاجي الفاخر */
         .wrapper {
-            background: var(--glass-bg);
-            border: 2px solid var(--glass-border);
-            max-width: 550px;
+            background: var(--glass-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            max-width: 520px;
             width: 100%;
-            padding: 50px 30px;
+            padding: 45px 30px;
             text-align: center;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(255, 117, 151, 0.12);
+            border-radius: 24px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
             position: relative;
-            animation: fadeInPage 1.2s ease-out;
-        }
-
-        .wrapper::before {
-            content: '';
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px dashed var(--joy-accent);
-            border-radius: 22px;
-            pointer-events: none;
-        }
-
-        @keyframes fadeInPage {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            border-top: 3px solid var(--gold);
         }
 
         .quran {
             font-family: 'Amiri', serif;
-            font-size: 1.25rem;
-            color: #4a6b5d;
-            margin-bottom: 35px;
+            font-size: 1.2rem;
+            color: #d1e2da;
+            margin-bottom: 30px;
             line-height: 1.8;
+            opacity: 0.9;
         }
 
         .names-container {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         
         .names-container h1 {
             font-family: 'Alex Brush', cursive;
-            font-size: 4.5rem;
-            background: linear-gradient(135deg, var(--joy-pink), var(--gold-dark));
+            font-size: 4.2rem;
+            background: linear-gradient(135deg, #ffffff, var(--gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: normal;
             line-height: 1.1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.02);
         }
 
         .and-connector {
-            font-family: 'Cairo', sans-serif;
-            font-weight: 300;
-            font-size: 1.6rem;
-            color: var(--joy-pink);
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
             display: block;
             margin: 5px 0;
         }
 
         .intro-text {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 300;
+            color: #e0e0e0;
             max-width: 440px;
-            margin: 0 auto 35px auto;
-            line-height: 1.6;
+            margin: 0 auto 30px auto;
+            line-height: 1.7;
         }
 
         .details-grid {
@@ -111,176 +131,129 @@
         }
 
         .info-card {
-            background: rgba(255, 245, 247, 0.6);
-            border: 1px solid rgba(255, 117, 151, 0.15);
-            padding: 20px;
-            border-radius: 20px;
-            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px;
+            border-radius: 16px;
         }
 
         .info-card h3 {
-            font-size: 0.95rem;
-            color: var(--joy-pink);
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 6px;
             font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .info-card p {
-            font-size: 1.15rem;
-            font-weight: 600;
-            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 400;
         }
 
         .timer-heading {
             font-size: 1.1rem;
-            color: var(--text-main);
-            margin-bottom: 25px;
-            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 400;
             letter-spacing: 0.5px;
         }
 
-        .modern-timer {
+        /* مؤقت ديجيتال مودرن فاخر للغاية */
+        .digital-timer {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 45px;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 35px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(223, 186, 107, 0.2);
         }
 
-        .circle-box {
-            position: relative;
-            width: 85px;
-            height: 85px;
-        }
-
-        .circle-box svg {
-            width: 85px;
-            height: 85px;
-            transform: rotate(-90deg);
-        }
-
-        .circle-box circle {
-            width: 100%; height: 100%;
-            fill: none;
-            stroke-width: 5;
-            stroke-linecap: round;
-        }
-
-        .circle-bg {
-            stroke: rgba(255, 117, 151, 0.1);
-        }
-
-        .circle-progress {
-            stroke: var(--joy-pink);
-            stroke-dasharray: 238;
-            stroke-dashoffset: 238;
-            transition: stroke-dashoffset 1s linear;
-        }
-
-        .timer-inner-text {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
+        .digital-segment {
             text-align: center;
-            width: 100%;
+            min-width: 70px;
         }
 
-        .timer-inner-text .number {
-            font-size: 1.4rem;
+        .digital-segment .number {
+            font-family: monospace, sans-serif;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--text-main);
+            color: #ffffff;
             display: block;
-            line-height: 1.2;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            line-height: 1.1;
         }
 
-        .timer-inner-text .label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .digital-segment .label {
+            font-size: 0.75rem;
+            color: #b3b3b3;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .digital-divider {
+            font-size: 1.8rem;
+            color: var(--gold);
+            animation: blink 1s infinite;
+            padding-bottom: 20px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
         .audio-control {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            background: #fff;
-            border: 1px solid var(--joy-accent);
-            width: 45px;
-            height: 45px;
+            top: 25px; left: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            width: 40px; height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(255, 117, 151, 0.15);
+            display: flex; justify-content: center; align-items: center;
             z-index: 10;
-            font-size: 1.2rem;
-            transition: transform 0.2s;
-        }
-
-        .action-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--joy-pink), var(--gold-dark));
-            color: #fff;
-            border: none;
-            border-radius: 16px;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 117, 151, 0.25);
-            transition: all 0.3s ease;
-            font-family: 'Cairo', sans-serif;
-            margin-bottom: 15px;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(255, 117, 151, 0.35);
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .secondary-btn {
             display: block;
             width: 100%;
-            padding: 15px;
-            background: #ffffff;
-            color: var(--text-main);
-            border: 1px solid var(--joy-accent);
-            border-radius: 16px;
-            font-size: 1.05rem;
+            padding: 14px;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            font-size: 1rem;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .secondary-btn:hover {
-            background: #fff5f7;
-            border-color: var(--joy-pink);
-        }
-
-        .rsvp-form-container {
-            display: none;
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid var(--joy-accent);
-            animation: fadeInPage 0.4s ease-out;
-        }
-
-        .rsvp-form-container input, .rsvp-form-container select {
-            width: 100%; padding: 12px; margin-bottom: 12px;
-            border: 1px solid #f0f0f0; border-radius: 12px;
-            font-family: 'Cairo', sans-serif; text-align: right; outline: none;
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--gold-glow);
         }
     </style>
 </head>
 <body>
 
+    <!-- الشاشة الافتتاحية السحرية -->
+    <div id="splash-screen">
+        <h2 style="font-family:'Alex Brush', cursive; font-size: 3rem; margin-bottom: 30px; color: #fff;">Mohamed & Shahenda</h2>
+        <button class="splash-btn" onclick="openInvitation()">افتتاح دعوة ليلة العمر ✨</button>
+    </div>
+
     <div class="audio-control" onclick="toggleAudio()" id="musicBtn">🎵</div>
 
+    <!-- موسيقى بيانو وتشيلو سينمائية فخمة للغاية ومودرن -->
     <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mp3">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
     </audio>
 
     <div class="wrapper">
@@ -292,7 +265,7 @@
 
         <div class="names-container">
             <h1>Mohamed</h1>
-            <span class="and-connector">&</span>
+            <span class="and-connector">and</span>
             <h1>Shahenda</h1>
         </div>
 
@@ -311,40 +284,32 @@
             </div>
         </div>
 
-        <div class="timer-heading">الأيام المتبقية على ليلة العمر وبداية حكايتنا معاً ✨💍</div>
+        <div class="timer-heading">المتبقي على ليلة العمر وبداية حكايتنا معاً 💫</div>
         
-        <div class="modern-timer">
-            <div class="circle-box">
-                <svg><circle class="circle-bg" cx="42" cy="42" r="38"/><circle class="circle-progress" id="p-days" cx="42" cy="42" r="38"/></svg>
-                <div class="timer-inner-text"><span class="number" id="d-num">00</span><span class="label">أيام</span></div>
+        <!-- المؤقت الديجيتال المودرن الفاخر -->
+        <div class="digital-timer">
+            <div class="digital-segment">
+                <span class="number" id="d-num">00</span>
+                <span class="label">أيام</span>
             </div>
-            <div class="circle-box">
-                <svg><circle class="circle-bg" cx="42" cy="42" r="38"/><circle class="circle-progress" id="p-hours" cx="42" cy="42" r="38"/></svg>
-                <div class="timer-inner-text"><span class="number" id="h-num">00</span><span class="label">ساعات</span></div>
+            <div class="digital-divider">:</div>
+            <div class="digital-segment">
+                <span class="number" id="h-num">00</span>
+                <span class="label">ساعات</span>
             </div>
-            <div class="circle-box">
-                <svg><circle class="circle-bg" cx="42" cy="42" r="38"/><circle class="circle-progress" id="p-minutes" cx="42" cy="42" r="38"/></svg>
-                <div class="timer-inner-text"><span class="number" id="m-num">00</span><span class="label">دقائق</span></div>
+            <div class="digital-divider">:</div>
+            <div class="digital-segment">
+                <span class="number" id="m-num">00</span>
+                <span class="label">دقائق</span>
             </div>
-            <div class="circle-box">
-                <svg><circle class="circle-bg" cx="42" cy="42" r="38"/><circle class="circle-progress" id="p-seconds" cx="42" cy="42" r="38"/></svg>
-                <div class="timer-inner-text"><span class="number" id="s-num">00</span><span class="label">ثواني</span></div>
+            <div class="digital-divider">:</div>
+            <div class="digital-segment">
+                <span class="number" id="s-num">00</span>
+                <span class="label">ثواني</span>
             </div>
         </div>
 
-        <button class="action-btn" onclick="toggleRSVPForm()">💖 تأكيد حضوركم يفرحنا</button>
-        
-        <div class="rsvp-form-container" id="rsvpForm">
-            <input type="text" id="gName" placeholder="الاسم الكريم" required>
-            <select id="gStatus" required>
-                <option value="" disabled selected>هل ستشرفنا بالحضور؟</option>
-                <option value="yes">نعم، سأحضر بكل سرور ومحبة ✨</option>
-                <option value="no">أعتذر لظروف خاصة 🌹</option>
-            </select>
-            <button class="action-btn" style="margin-bottom:0; background: var(--joy-pink);" onclick="submitRSVP()">إرسال التهنئة والتأكيد</button>
-        </div>
-
-        <a href="https://maps.app.goo.gl/HKdqJA3PxQt6BjmLA?g_st=ic" target="_blank" class="secondary-btn">📍 لوكيشن القاعة على خريطة جوجل</a>
+        <a href="https://maps.app.goo.gl/HKdqJA3PxQt6BjmLA?g_st=ic" target="_blank" class="secondary-btn">📍 موقع القاعة على خريطة جوجل</a>
 
     </div>
 
@@ -352,41 +317,23 @@
         const audio = document.getElementById('bgMusic');
         const musicBtn = document.getElementById('musicBtn');
         
-        document.body.addEventListener('click', () => {
-            if(audio.paused && musicBtn.innerText === "🎵") {
-                audio.play().catch(e => console.log("Audio play blocked"));
-                musicBtn.innerText = "⏸️";
-            }
-        }, { once: true });
+        function openInvitation() {
+            // إخفاء الشاشة الافتتاحية بسلاسة وتشغيل الميوزك الفخمة
+            const splash = document.getElementById('splash-screen');
+            splash.style.opacity = '0';
+            splash.style.visibility = 'hidden';
+            
+            audio.play().catch(e => console.log("Audio presentation initialized"));
+            musicBtn.innerText = "⏸️";
+        }
 
         function toggleAudio() {
             if (audio.paused) { audio.play(); musicBtn.innerText = "⏸️"; } 
             else { audio.pause(); musicBtn.innerText = "🎵"; }
         }
 
-        function toggleRSVPForm() {
-            const form = document.getElementById('rsvpForm');
-            form.style.display = form.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function submitRSVP() {
-            const name = document.getElementById('gName').value;
-            const status = document.getElementById('gStatus').value === 'yes' ? 'جايين نفرح معاكم ونيجي الفرح إن شاء الله ✨🎉' : 'أعتذر عن الحضور لظروف خاصة.. ألف مبروك يا عرسان 🌹';
-            if(!name || !document.getElementById('gStatus').value) { alert('برجاء ملء البيانات الكريمة أولاً'); return; }
-            
-            const msg = `مرحباً محمد & شاهندا!%0Aالاسم: *${name}*%0Aتأكيد حضور الفرح: *${status}*`;
-            const myNumber = "201104593023";
-            window.open(`https://wa.me/${myNumber}?text=${msg}`, '_blank');
-        }
-
+        // حساب العداد التنازلي لليوم المنتظر
         const targetDate = new Date("June 25, 2026 20:00:00").getTime();
-        const maxDays = 365, maxHours = 24, maxMinutes = 60, maxSeconds = 60;
-
-        function updateCircle(id, val, max) {
-            const circle = document.getElementById(id);
-            const offset = 238 - (238 * val) / max;
-            circle.style.strokeDashoffset = offset;
-        }
 
         setInterval(() => {
             const now = new Date().getTime();
@@ -406,11 +353,6 @@
             document.getElementById('h-num').innerText = h < 10 ? '0'+h : h;
             document.getElementById('m-num').innerText = m < 10 ? '0'+m : m;
             document.getElementById('s-num').innerText = s < 10 ? '0'+s : s;
-
-            updateCircle('p-days', d, maxDays);
-            updateCircle('p-hours', h, maxHours);
-            updateCircle('p-minutes', m, maxMinutes);
-            updateCircle('p-seconds', s, maxSeconds);
         }, 1000);
     </script>
 </body>
