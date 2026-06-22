@@ -28,12 +28,10 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
-            /* استخدام الصورة الجميلة كخلفية كاملة ومثبتة للموقع */
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('image_3.png') no-repeat center center fixed;
             background-size: cover;
         }
 
-        /* الشاشة الافتتاحية الفاخرة */
         #splash-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -67,7 +65,6 @@
             100% { transform: scale(1); box-shadow: 0 0 20px var(--gold-glow); }
         }
 
-        /* كارت الدعوة الزجاجي الفاخر */
         .wrapper {
             background: var(--glass-card);
             backdrop-filter: blur(12px);
@@ -158,7 +155,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* مؤقت ديجيتال مودرن فاخر للغاية */
         .digital-timer {
             display: flex;
             justify-content: center;
@@ -243,7 +239,6 @@
 </head>
 <body>
 
-    <!-- الشاشة الافتتاحية السحرية -->
     <div id="splash-screen">
         <h2 style="font-family:'Alex Brush', cursive; font-size: 3rem; margin-bottom: 30px; color: #fff;">Mohamed & Shahenda</h2>
         <button class="splash-btn" onclick="openInvitation()">افتتاح دعوة ليلة العمر ✨</button>
@@ -251,9 +246,9 @@
 
     <div class="audio-control" onclick="toggleAudio()" id="musicBtn">🎵</div>
 
-    <!-- موسيقى بيانو وتشيلو سينمائية فخمة للغاية ومودرن -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mp3">
+    <!-- تراك أفراح أجنبي رومانسي ومبهج جداً وترندي يناسب حفل الزفاف -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-wedding-bells-1162.mp3" type="audio/mp3">
     </audio>
 
     <div class="wrapper">
@@ -286,7 +281,6 @@
 
         <div class="timer-heading">المتبقي على ليلة العمر وبداية حكايتنا معاً 💫</div>
         
-        <!-- المؤقت الديجيتال المودرن الفاخر -->
         <div class="digital-timer">
             <div class="digital-segment">
                 <span class="number" id="d-num">00</span>
@@ -318,13 +312,16 @@
         const musicBtn = document.getElementById('musicBtn');
         
         function openInvitation() {
-            // إخفاء الشاشة الافتتاحية بسلاسة وتشغيل الميوزك الفخمة
             const splash = document.getElementById('splash-screen');
             splash.style.opacity = '0';
             splash.style.visibility = 'hidden';
             
-            audio.play().catch(e => console.log("Audio presentation initialized"));
-            musicBtn.innerText = "⏸️";
+            audio.play().then(() => {
+                musicBtn.innerText = "⏸️";
+            }).catch(e => {
+                console.log("Playback blocked:", e);
+                musicBtn.innerText = "🎵";
+            });
         }
 
         function toggleAudio() {
@@ -332,7 +329,6 @@
             else { audio.pause(); musicBtn.innerText = "🎵"; }
         }
 
-        // حساب العداد التنازلي لليوم المنتظر
         const targetDate = new Date("June 25, 2026 20:00:00").getTime();
 
         setInterval(() => {
